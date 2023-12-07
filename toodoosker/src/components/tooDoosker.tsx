@@ -4,17 +4,16 @@ const InitialLoadComponent = () => {
   const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState({ content: '' })
 
-  useEffect(() => {
-    const fetchNotes = async () => {
-      try {
-        const response = await fetch('http://localhost:7070/notes')
-        const data = await response.json()
-        setNotes(data)
-      } catch (error) {
-        console.error('Error fetching data:', error)
-      }
+  const fetchNotes = async () => {
+    try {
+      const response = await fetch('http://localhost:7070/notes')
+      const data = await response.json()
+      setNotes(data)
+    } catch (error) {
+      console.error('Error fetching data:', error)
     }
-
+  }
+  useEffect(() => {
     fetchNotes()
   }, [])
 
@@ -69,6 +68,7 @@ const InitialLoadComponent = () => {
           />
         </label>
         <button onClick={handleAddNote}>Сохранить</button>
+        <button onClick={fetchNotes}>Обновить</button>
       </div>
 
       {notes.map((note) => (
