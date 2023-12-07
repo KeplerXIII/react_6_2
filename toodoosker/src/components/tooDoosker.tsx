@@ -7,28 +7,28 @@ const InitialLoadComponent = () => {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const response = await fetch('http://localhost:7070/notes');
+        const response = await fetch('http://localhost:7070/notes')
         const data = await response.json()
         setNotes(data)
       } catch (error) {
         console.error('Error fetching data:', error)
       }
-    };
+    }
 
-    fetchNotes();
-  }, []);
+    fetchNotes()
+  }, [])
 
   const handleDeleteNote = async (id: number) => {
     try {
       await fetch(`http://localhost:7070/notes/${id}`, {
         method: 'DELETE',
-      });
+      })
 
-      setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+      setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id))
     } catch (error) {
       console.error('Error deleting note:', error)
     }
-  };
+  }
 
   const handleAddNote = async () => {
     try {
@@ -39,22 +39,22 @@ const InitialLoadComponent = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(newNote),
-      });
+      })
 
       // Проверяем, является ли ответ JSON
-      const contentType = response.headers.get('content-type');
+      const contentType = response.headers.get('content-type')
       if (!contentType || !contentType.includes('application/json')) {
-        throw new Error('Server did not respond with JSON data');
+        throw new Error('Server did not respond with JSON data')
       }
 
-      const data = await response.json();
+      const data = await response.json()
 
-      setNotes(data);
-      setNewNote({ content: '' });
+      setNotes(data)
+      setNewNote({ content: '' })
     } catch (error) {
-      console.error('Error adding note:', error.message);
+      console.error('Error adding note:', error.message)
     }
-  };
+  }
 
   return (
     <div>
@@ -78,7 +78,7 @@ const InitialLoadComponent = () => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default InitialLoadComponent;
+export default InitialLoadComponent
