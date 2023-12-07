@@ -1,11 +1,11 @@
 import './App.css'
+import InitialLoadComponent from './components/tooDoosker'
 
 function App() {
-  return (
-    <>
-     
-    </>
-  )
+
+  
+
+  return <InitialLoadComponent/>
 }
 
 export default App
